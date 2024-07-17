@@ -1,11 +1,11 @@
-com.android.tools.build:apksig:8.5.0
-com.android.tools.build:apkzlib:8.5.0
-com.android.tools.build:builder-model:8.5.0
-com.android.tools.build:builder:8.5.0
-com.android.tools.build:gradle-api:8.5.0
-com.android.tools.build:gradle:8.5.0
-com.android.tools.build:manifest-merger:31.5.0
-com.android:zipflinger:8.5.0
+com.android.tools.build:apksig:7.4.2
+com.android.tools.build:apkzlib:7.4.2
+com.android.tools.build:builder-model:7.4.2
+com.android.tools.build:builder:7.4.2
+com.android.tools.build:gradle-api:7.4.2
+com.android.tools.build:gradle:7.4.2
+com.android.tools.build:manifest-merger:30.4.2
+com.android:zipflinger:7.4.2
 com.squareup:javawriter:2.5.0
 org.jetbrains.dokka:dokka-core:1.9.20
 org.jetbrains.dokka:dokka-gradle-plugin:1.9.20
@@ -23,4 +23,6 @@ org.jetbrains.kotlin:kotlin-stdlib:1.8.22
 org.jetbrains.kotlin:kotlin-tooling-core:1.8.22
 org.jetbrains.kotlin:kotlin-util-io:1.8.22
 org.jetbrains:annotations:13.0
-org.ow2.asm:asm:9.6
+org.jetbrains:markdown-jvm:0.3.1
+org.jetbrains:markdown:0.3.1
+org.ow2.asm:asm:9.2
