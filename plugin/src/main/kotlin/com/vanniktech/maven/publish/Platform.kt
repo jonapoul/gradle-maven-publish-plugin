@@ -289,8 +289,6 @@ data class KotlinMultiplatform internal constructor(
     }
 
     project.extensions.configure(KotlinMultiplatformExtension::class.java) {
-      it.withSourcesJar(sourcesJar)
-
       if (androidVariantsToPublish.isNotEmpty()) {
         it.targets.configureEach { target ->
           if (target is KotlinAndroidTarget) {

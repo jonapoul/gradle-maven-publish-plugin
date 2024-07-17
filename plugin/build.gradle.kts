@@ -30,14 +30,6 @@ buildConfig {
   buildConfigField("String", "VERSION", "\"${project.findProperty("VERSION_NAME") ?: "dev"}\"")
 }
 
-val integrationTestSourceSet = sourceSets.create("integrationTest") {
-  compileClasspath += sourceSets["main"].output
-  compileClasspath += configurations.testRuntimeClasspath.get()
-  runtimeClasspath += output + compileClasspath
-}
-val integrationTestImplementation = configurations["integrationTestImplementation"]
-  .extendsFrom(configurations.testImplementation.get())
-
 dependencies {
   api(gradleApi())
   api(libs.kotlin.stdlib)
@@ -56,50 +48,4 @@ dependencies {
   testImplementation(libs.truth.java8)
   testImplementation(libs.truth.testKit)
   testImplementation(libs.maven.model)
-}
-
-val integrationTest by tasks.registering(Test::class) {
-  dependsOn(
-    tasks.publishToMavenLocal,
-    projects.nexus.dependencyProject.tasks.publishToMavenLocal,
-    projects.centralPortal.dependencyProject.tasks.publishToMavenLocal,
-  )
-  mustRunAfter(tasks.test)
-
-  description = "Runs the integration tests."
-  group = "verification"
-
-  testClassesDirs = integrationTestSourceSet.output.classesDirs
-  classpath = integrationTestSourceSet.runtimeClasspath
-
-  useJUnitPlatform()
-  testLogging.showStandardStreams = true
-  maxHeapSize = "2g"
-  jvmArgs(
-    "--add-opens",
-    "java.base/java.lang.invoke=ALL-UNNAMED",
-    "--add-opens",
-    "java.base/java.net=ALL-UNNAMED",
-    "--add-opens",
-    "java.base/java.util=ALL-UNNAMED",
-  )
-
-  systemProperty("com.vanniktech.publish.version", project.property("VERSION_NAME").toString())
-  systemProperty("testConfigMethod", System.getProperty("testConfigMethod"))
-  systemProperty("quickTest", System.getProperty("quickTest"))
-
-  beforeTest(
-    closureOf<TestDescriptor> {
-      logger.lifecycle("Running test: ${this.className} ${this.displayName}")
-    },
-  )
-}
-
-val quickIntegrationTest by tasks.registering {
-  dependsOn(integrationTest)
-  System.setProperty("quickTest", "true")
-}
-
-tasks.check {
-  dependsOn(integrationTest)
 }
