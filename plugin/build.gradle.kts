@@ -2,6 +2,7 @@ plugins {
   id("shared")
   id("java-gradle-plugin")
   alias(libs.plugins.buildconfig)
+  alias(libs.plugins.dependencyGuard)
 }
 
 gradlePlugin {

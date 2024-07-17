@@ -10,6 +10,7 @@ plugins {
   id("kotlin-kapt")
   id("com.vanniktech.maven.publish")
   id("org.jlleitschuh.gradle.ktlint")
+  id("com.dropbox.dependency-guard")
 }
 
 repositories {
@@ -35,4 +36,9 @@ configurations.all {
     force(libs.kotlin.stdlib.jdk8)
     force(libs.kotlin.reflect)
   }
+}
+
+dependencyGuard {
+  configuration("runtimeClasspath")
+  configuration("compileClasspath")
 }
