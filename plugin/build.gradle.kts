@@ -1,6 +1,7 @@
 plugins {
   id("shared")
   id("java-gradle-plugin")
+  `maven-publish`
   alias(libs.plugins.buildconfig)
   alias(libs.plugins.dependencyGuard)
 }
