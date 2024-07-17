@@ -5,21 +5,25 @@ plugins {
   alias(libs.plugins.dependencyGuard)
 }
 
+val versionName = properties["VERSION_NAME"]?.toString() ?: error("No version found")
+
 gradlePlugin {
   plugins {
     create("mavenPublishPlugin") {
-      id = "com.vanniktech.maven.publish"
+      id = "dev.jonpoulton.maven.publish"
       implementationClass = "com.vanniktech.maven.publish.MavenPublishPlugin"
       displayName = "Gradle Maven Publish Plugin"
       description = "Gradle plugin that configures publish tasks to automatically upload all of your Java, Kotlin, " +
         "Gradle, or Android libraries to any Maven instance."
+      version = versionName
     }
     create("mavenPublishBasePlugin") {
-      id = "com.vanniktech.maven.publish.base"
+      id = "dev.jonpoulton.maven.publish.base"
       implementationClass = "com.vanniktech.maven.publish.MavenPublishBasePlugin"
       displayName = "Gradle Maven Publish Base Plugin"
       description = "Gradle plugin that configures publish tasks to automatically upload all of your Java, Kotlin, " +
         "Gradle, or Android libraries to any Maven instance."
+      version = versionName
     }
   }
 }
